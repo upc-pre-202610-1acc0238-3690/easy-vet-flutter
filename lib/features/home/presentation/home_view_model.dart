@@ -1,5 +1,6 @@
 import 'package:easy_vet/features/home/domain/product.dart';
 import 'package:easy_vet/features/home/domain/product_repository.dart';
+import 'package:easy_vet/features/home/presentation/home_state.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -9,21 +10,19 @@ class HomeViewModel extends ChangeNotifier {
     loadProducts();
   }
 
-  List<Product> products = [];
-  bool isLoading = false;
-  String? errorMessage;
+  HomeState state = HomeState();
 
   Future<void> loadProducts() async {
-    isLoading = true;
-    errorMessage = null;
+    state = state.copyWith(isLoading: true, errorMessage: null);
     notifyListeners();
 
     try {
-      products = await repository.getProducts();
+      List<Product> products = await repository.getProducts();
+      state = state.copyWith(products: products, isLoading: false);
     } catch (e) {
-      errorMessage = 'Failed to load products: $e';
+      String errorMessage = 'Failed to load products: $e';
+      state = state.copyWith(errorMessage: errorMessage, isLoading: false);
     }
-    isLoading = false;
     notifyListeners();
   }
 }

@@ -8,8 +8,8 @@ class CartRepositoryImpl implements CartRepository {
 
   const CartRepositoryImpl({required this.service});
   @override
-  Future<void> addToCart(int productId, int quantity) {
-    throw UnimplementedError();
+  Future<void> addToCart(int productId, int quantity) async {
+    await service.addToCart(productId, quantity);
   }
 
   @override

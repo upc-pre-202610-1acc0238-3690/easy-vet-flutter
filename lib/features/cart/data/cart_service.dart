@@ -32,4 +32,25 @@ class CartService {
     }
     throw Exception('Failed to load cart items: ${response.statusCode}');
   }
+
+  Future<void> addToCart(int productId, int quantity) async {
+    final Uri uri = Uri.parse(_baseUrl);
+    final String? token = await storage.getToken();
+
+    if (token == null) {
+      throw Exception('No token found');
+    }
+    final response = await http.post(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({'productId': productId, 'quantity': quantity}),
+    );
+
+    if (response.statusCode != HttpStatus.ok) {
+      throw Exception('Failed to add to cart: ${response.statusCode}');
+    }
+  }
 }

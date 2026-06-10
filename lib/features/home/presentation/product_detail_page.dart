@@ -8,8 +8,12 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(
-        children: [Image.network(product.image), Text(product.name)],
+        children: [
+          Hero(tag: product.id, child: Image.network(product.image)),
+          Text(product.name),
+        ],
       ),
     );
   }

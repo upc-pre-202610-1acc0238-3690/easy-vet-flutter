@@ -8,6 +8,7 @@ class HomeViewModel extends ChangeNotifier {
 
   HomeViewModel({required this.repository}) {
     loadProducts();
+    syncProducts();
   }
 
   HomeState state = HomeState();
@@ -22,6 +23,16 @@ class HomeViewModel extends ChangeNotifier {
     } catch (e) {
       String errorMessage = 'Failed to load products: $e';
       state = state.copyWith(errorMessage: errorMessage, isLoading: false);
+    }
+    notifyListeners();
+  }
+
+  Future<void> syncProducts() async {
+    try {
+      await repository.syncProducts();
+    } catch (e) {
+      String errorMessage = 'Failed to sync products: $e';
+      state = state.copyWith(errorMessage: errorMessage);
     }
     notifyListeners();
   }

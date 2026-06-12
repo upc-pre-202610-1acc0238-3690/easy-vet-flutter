@@ -26,7 +26,16 @@ class ProductDetailPage extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          Hero(tag: product.id, child: Image.network(product.image)),
+          Hero(
+            tag: product.id,
+            child: Image.network(
+              product.image,
+              fit: BoxFit.cover,
+              errorBuilder: (_, _, _) {
+                return const Icon(Icons.broken_image);
+              },
+            ),
+          ),
           Text(product.name),
         ],
       ),

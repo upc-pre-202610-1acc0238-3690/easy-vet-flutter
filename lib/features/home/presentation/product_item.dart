@@ -12,7 +12,13 @@ class ProductItem extends StatelessWidget {
         children: [
           Hero(
             tag: product.id,
-            child: Image.network(product.image, height: 256),
+            child: Image.network(
+              product.image,
+              height: 256,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.broken_image, size: 256);
+              },
+            ),
           ),
           Text(product.name),
         ],

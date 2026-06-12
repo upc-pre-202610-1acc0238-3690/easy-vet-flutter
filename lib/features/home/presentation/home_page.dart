@@ -21,7 +21,10 @@ class HomePage extends StatelessWidget {
       return Center(child: Text(state.errorMessage!));
     }
 
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
       itemCount: state.products.length,
       itemBuilder: (context, index) => GestureDetector(
         onTap: () => Navigator.push(

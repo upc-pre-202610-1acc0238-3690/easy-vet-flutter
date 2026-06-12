@@ -28,6 +28,8 @@ class ProductRepositoryImpl implements ProductRepository {
         description: dto.description,
         price: dto.price,
         image: dto.image,
+        stock: dto.stock,
+        rating: dto.rating,
       );
       await dao.insertProduct(entity);
     }

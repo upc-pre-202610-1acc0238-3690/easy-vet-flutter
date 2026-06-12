@@ -6,6 +6,8 @@ class ProductEntity {
   final String description;
   final double price;
   final String image;
+  final int stock;
+  final double rating;
 
   const ProductEntity({
     required this.id,
@@ -13,6 +15,8 @@ class ProductEntity {
     required this.description,
     required this.price,
     required this.image,
+    required this.stock,
+    required this.rating,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +26,8 @@ class ProductEntity {
       'description': description,
       'price': price,
       'image': image,
+      'stock': stock,
+      'rating': rating,
     };
   }
 
@@ -32,6 +38,8 @@ class ProductEntity {
       description: map['description'],
       price: map['price'],
       image: map['image'],
+      stock: map['stock'],
+      rating: map['rating'],
     );
   }
 
@@ -42,6 +50,8 @@ class ProductEntity {
       description: description,
       price: price,
       image: image,
+      stock: stock,
+      rating: rating,
     );
   }
 }

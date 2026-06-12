@@ -9,18 +9,41 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Hero(
-            tag: product.id,
-            child: Image.network(
-              product.image,
-              height: 256,
-              errorBuilder: (context, error, stackTrace) {
-                return const Icon(Icons.broken_image, size: 256);
-              },
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Hero(
+                tag: product.id,
+                child: Image.network(
+                  product.image,
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.broken_image);
+                  },
+                ),
+              ),
             ),
           ),
-          Text(product.name),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Text(
+              '\$${product.price.toStringAsFixed(2)}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Text(
+              product.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          SizedBox(height: 8.0),
         ],
       ),
     );

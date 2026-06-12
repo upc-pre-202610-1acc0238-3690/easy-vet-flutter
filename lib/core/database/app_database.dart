@@ -17,6 +17,7 @@ class AppDatabase {
     return await openDatabase(
       path,
       version: 1,
+  
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE products (
@@ -24,7 +25,9 @@ class AppDatabase {
             name TEXT,
             description TEXT,
             price REAL,
-            image TEXT
+            image TEXT,
+            stock INTEGER,
+            rating REAL
           )
         ''');
       },
